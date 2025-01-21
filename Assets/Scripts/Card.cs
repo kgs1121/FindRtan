@@ -111,8 +111,8 @@ public class Card : MonoBehaviour
         canOpen = true;
 
     }
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
 
     public void membercardsize(SpriteRenderer sprite)
@@ -130,6 +130,6 @@ public class Card : MonoBehaviour
 
 
 
->>>>>>> dev
+//>>>>>>> dev
 }
 
