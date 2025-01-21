@@ -69,12 +69,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   
     public void third()
     {
         if (firstCard.idx == secondCard.idx)
         {
             changeColor(1);
+            foreach (Transform Card in board)    
+            {
+                Transform back = Card.Find("Back");
+                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                cardSprite.color = new Color(100f, 100f, 100f);
+            }
             Collection.canCollect = true;
 
         }
@@ -149,8 +154,13 @@ public class GameManager : MonoBehaviour
         
         
     }
+
+    
+
+
     public float GetLimitTime()
     {
         return timeLimit;
     }
+
 }
