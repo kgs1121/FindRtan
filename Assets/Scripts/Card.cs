@@ -107,14 +107,15 @@ public class Card : MonoBehaviour
     }
     public void Matched_Move()
     {
-        for (int i = 0; i < GameManager.Instance.matchedCards.Length; i++)
+        for (int i = 0; i < GameManager.Instance.matchedCards.Count; i++)
         {
             if (!GameManager.Instance.matchedCards[i].activeSelf) //활성화되있지 않다면
             {
-                GameManager.Instance.matchedCards[i].GetComponent<SpriteRenderer>().sprite = frontImage.sprite;
-                GameManager.Instance.matchedCards[i].GetComponent<Text>().text = Enum.GetName(typeof(Name), idx);
                 GameManager.Instance.matchedCards[i].SetActive(true);
+                GameManager.Instance.matchedCards[i].GetComponent<MatchedCard>().image.sprite = frontImage.sprite;
+                GameManager.Instance.matchedCards[i].GetComponent<MatchedCard>().name.text = Enum.GetName(typeof(Name), idx);
 
+                break;
             }
         }
     }

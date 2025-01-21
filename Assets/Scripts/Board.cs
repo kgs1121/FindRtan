@@ -38,7 +38,7 @@ public class Board : MonoBehaviour
 
             go.transform.position = new Vector2( x, y );
 
-            GameManager.Instance.matchedCards.Append(go);
+            GameManager.Instance.matchedCards.Add(go);
         }
     }
 }

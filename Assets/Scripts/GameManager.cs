@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public Card firstCard;
     public Card secondCard;
-    public GameObject[] matchedCards;
+    public List<GameObject> matchedCards = new List<GameObject>();
 
     public Text timeTxt;
     public GameObject endTxt;
