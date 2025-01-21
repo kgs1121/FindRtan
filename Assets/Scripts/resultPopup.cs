@@ -11,6 +11,8 @@ public class resultPopup : MonoBehaviour
     private float takenTime=0f;
 
     public Text popupName;
+    public Text nowScoreText;
+    public Text highScoreText;
 
     public GameObject memberInfo;
     private GameObject[] member = new GameObject[6];
@@ -22,20 +24,16 @@ public class resultPopup : MonoBehaviour
 
     private bool isFirst=true;
 
-
-    private Text nowScoreText;
-    private Text highScoreText;
-
-    private Button restart;
-    private Button toMain;
+    public Button restart;
+    public Button toMain;
+    private Text restartText;
+    private Text toMainText;
 
     // Start is called before the first frame update
     void Start()
     {
         if (manager == null)
             manager = GameManager.Instance;
-
-
 
         takenTime = manager.time;
         nowScore = 0;
@@ -44,8 +42,10 @@ public class resultPopup : MonoBehaviour
         {
             isFirst = false;
             SetPopupText();
-            SetMemberInfo();
         }
+
+        SetMemberInfo();
+        ScoreCheck();
     }
 
     private void SetMemberInfo()
@@ -56,13 +56,9 @@ public class resultPopup : MonoBehaviour
         {
             GameObject go = Instantiate(memberInfo, grid);
             go.AddComponent<LayoutElement>();
-            Image[] img = go.transform.GetComponentsInChildren<Image>();
 
-            //img[0].sprite= Resources.Load<Sprite>($"");
-            img[1].sprite = Resources.Load<Sprite>($"member{i}");
-
-            Text txt = go.GetComponentInChildren<Text>();
-            txt.text = manager.memberName[i];
+            MemberData data = go.GetComponent<MemberData>();
+            data.SetMemberData(i);
         }
     }
 
@@ -70,6 +66,12 @@ public class resultPopup : MonoBehaviour
     private void SetPopupText()
     {
         popupName.text = "<b>게임 결과</b>";
+
+        restartText = restart.GetComponentInChildren<Text>();
+        toMainText = toMain.GetComponentInChildren<Text>();
+
+        restartText.text = "다시하기";
+        toMainText.text = "처음으로";
     }
 
     private void ScoreCheck()
@@ -77,29 +79,32 @@ public class resultPopup : MonoBehaviour
         highScore = level == 0 ? manager.normalScore : manager.hardScore;
 
 
-        if (false)    //ī�� ��Ī ���н�
+        if (false)    //매칭 실패시
         {
             nowScore = 0;
-            return;
         }
-
-
-        // ���� = �Ҹ�ð� / �õ�Ƚ��
-        nowScore = (int)manager.time / manager.cardCount;
-
-        if(nowScore>highScore)
+        else
         {
-            // ���� �ְ��������� ���� ������ ������ ����
-            highScore = nowScore;
-            if(level == 0 )
+            // 현재점수 = 시간 / 시도횟수
+            nowScore = (int)manager.time / manager.cardCount;
+
+            if (nowScore > highScore)
             {
-                manager.normalScore = highScore;
-            }
-            else
-            {
-                manager.hardScore = highScore;
+                // 현재점수가 기존 최고점수보다 높다면 최고점수 갱신
+                highScore = nowScore;
+                if (level == 0)
+                {
+                    manager.normalScore = highScore;
+                }
+                else
+                {
+                    manager.hardScore = highScore;
+                }
             }
         }
+
+
+        
 
         nowScoreText.text = "현재 점수 : ";
         nowScoreText.text += nowScore.ToString();
@@ -114,12 +119,12 @@ public class resultPopup : MonoBehaviour
 
     private void Restart()
     {
-        // ����� ��� �ۼ��ؼ� restart ��ư�� ����
+        // 재시작 기능 작성 후 restart 버튼에 연결
     }
 
     private void MoveMainScene()
     {
-        // ���� ������ �̵� ��� �ۼ��ؼ� toMain ��ư�� ����
+        // 메인 씬으로 이동 기능 작성 후 toMain 버튼에 연결
     }
 
 }

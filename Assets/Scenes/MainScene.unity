@@ -531,6 +531,7 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 8244a166874fb01469f4d14488879dc9, type: 3}
   cardCount: 0
   time: 0
+  resultPopup: {fileID: 9165315696951684086, guid: 7400700f2abbf8845bfd889e22398d5c, type: 3}
   normalScore: 0
   hardScore: 0
   memberName:

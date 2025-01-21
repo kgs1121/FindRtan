@@ -20,10 +20,12 @@ public class GameManager : MonoBehaviour
     public int cardCount = 0;
     public float time = 0.0f;
 
+    public Canvas mainCanvas;
+    public GameObject resultPopup;
+
     public int normalScore = 0;
     public int hardScore = 0;
 
-    public string[] memberName = new string[6] { "ÁøÈñ¿ø", "°­±â¼ö", "±è¹Î¼º", "¹ÚÈ£ÁØ", "À¯ÀçÇõ", "???" };
 
 
     private void Awake()
@@ -48,7 +50,9 @@ public class GameManager : MonoBehaviour
         if (time >= 30.00)
         {
             Time.timeScale = 0f;
-            endTxt.SetActive(true);
+            //endTxt.SetActive(true);
+            Instantiate(resultPopup,mainCanvas.transform);
+            time = 0;
         }
     }
 
