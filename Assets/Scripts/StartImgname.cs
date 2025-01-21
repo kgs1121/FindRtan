@@ -10,7 +10,7 @@ public class StartImgname : MonoBehaviour
     public Text textComponent;      // UI Text 컴포넌트
     public string[] members;  // 이미지 이름 배열
     public string[] texts;    // 텍스트 배열
-
+    private int membernum;
     public float changeInterval;  // 이미지와 텍스트 변경 간격
     private int currentIndex = 0;  // 현재 이미지와 텍스트의 인덱스
 
@@ -20,6 +20,7 @@ public class StartImgname : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        membernum = 6;
         changeInterval = 1f;
         memberarr();
         StartCoroutine(ChangeImage());
@@ -29,13 +30,13 @@ public class StartImgname : MonoBehaviour
 
     void memberarr()
     {
-        members = new string[5];  // "member0"부터 "member4"까지 5개의 요소로 배열 크기 설정
+        members = new string[membernum];  // "member0"부터 "member5"까지 6개의 요소로 배열 크기 설정
 
         for (int i = 0; i < members.Length; i++)
         {
             members[i] = $"member{i}";
         }
-        texts = new string[] { "진희원", "강기수", "김민성", "박호준", "유재혁"};
+        texts = new string[] { "진희원", "강기수", "김민성", "박호준", "유재혁", "르탄"};
     }
 
 
