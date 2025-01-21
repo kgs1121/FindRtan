@@ -17,11 +17,15 @@ public class Card : MonoBehaviour
 
     public SpriteRenderer frontImage;
 
+    private float membersize = 1f;  // 멤버 카드 사이즈
+
+
     public static bool canOpen = true;// 카드 열려있을때 못열게 막기
 
 
     void Start()
     {
+        membercardsize(frontImage);
         canOpen = true;
         audioSource = GetComponent<AudioSource>();
     }
@@ -104,6 +108,20 @@ public class Card : MonoBehaviour
     }
 
 
-    
+    public void membercardsize(SpriteRenderer sprite)
+    {
+        float originalWidth = sprite.sprite.bounds.size.x;
+        float originalHeight = sprite.sprite.bounds.size.y;
+
+        float scaleX = membersize / originalWidth;
+        float scaleY = membersize / originalHeight;
+
+        sprite.transform.localScale = new Vector3(scaleX, scaleY, 1);
+    }
+
+
+
+
+
 }
 
