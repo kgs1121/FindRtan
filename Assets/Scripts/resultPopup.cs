@@ -19,8 +19,8 @@ public class resultPopup : MonoBehaviour
 
     private int level = 0;
 
-    private int nowScore = 0;
-    private int highScore = 0;
+    private float nowScore = 0f;
+    private float highScore = 0f;
 
     private bool isFirst=true;
 
@@ -36,6 +36,7 @@ public class resultPopup : MonoBehaviour
             manager = GameManager.Instance;
 
         takenTime = manager.time;
+        manager.time = 0;
         nowScore = 0;
 
         if (isFirst)
@@ -85,8 +86,10 @@ public class resultPopup : MonoBehaviour
         }
         else
         {
-            // 현재점수 = 시간 / 시도횟수
-            nowScore = (int)manager.time / manager.cardCount;
+            if (manager.tryFlip == 0)
+                manager.tryFlip = 1;
+            // 현재점수 = 남은시간 / 시도횟수 * 100
+            nowScore = (manager.GetLimitTime()-takenTime) / manager.tryFlip * 100;
 
             if (nowScore > highScore)
             {
@@ -103,13 +106,10 @@ public class resultPopup : MonoBehaviour
             }
         }
 
-
-        
-
         nowScoreText.text = "현재 점수 : ";
-        nowScoreText.text += nowScore.ToString();
+        nowScoreText.text += nowScore.ToString("N0");
         highScoreText.text = "최고 점수 : ";
-        highScoreText.text += highScore.ToString();
+        highScoreText.text += highScore.ToString("N0");
     
     }
 

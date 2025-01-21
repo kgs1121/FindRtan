@@ -19,13 +19,14 @@ public class GameManager : MonoBehaviour
 
     public int cardCount = 0;
     public float time = 0.0f;
+    private float timeLimit = 3f;
 
     public Canvas mainCanvas;
     public GameObject resultPopup;
 
-    public int normalScore = 0;
-    public int hardScore = 0;
-
+    public float normalScore = 0f;
+    public float hardScore = 0f;
+    public int tryFlip = 0;
 
 
     private void Awake()
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+        time = 0;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -47,18 +49,17 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         timeTxt.text = time.ToString("N2");
 
-        if (time >= 30.00)
+        if (time >= timeLimit)
         {
             Time.timeScale = 0f;
             //endTxt.SetActive(true);
             Instantiate(resultPopup,mainCanvas.transform);
-            time = 0;
         }
     }
 
     public void Matched()
     {
-        
+        tryFlip++;
         if (firstCard.idx == secondCard.idx)
         {
             //ÆÄ±«
@@ -69,7 +70,9 @@ public class GameManager : MonoBehaviour
             if(cardCount == 0)
             {
                 Time.timeScale = 0f;
-                endTxt.SetActive(true);
+                //endTxt.SetActive(true);
+                Instantiate(resultPopup, mainCanvas.transform);
+
             }
         }
         else
@@ -81,9 +84,12 @@ public class GameManager : MonoBehaviour
         
         firstCard = null;
         secondCard = null;
-        
-
     }
 
+
+    public float GetLimitTime()
+    {
+        return timeLimit;
+    }
 
 }
