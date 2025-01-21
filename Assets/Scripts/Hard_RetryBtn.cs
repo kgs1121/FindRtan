@@ -1,17 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class RetryBtn : MonoBehaviour
+
+public class Hard_RetryBtn : MonoBehaviour
 {
-    public Image fadeImage; 
+   public Image fadeImage; 
     public float fadeSpeed = 1.5f; 
-    public void Retry()
+
+    public void Hard_Retry()
     {
+
         StartCoroutine(FadeInAndRetry());
     }
-    IEnumerator FadeInAndRetry()
+
+     IEnumerator FadeInAndRetry()
     {
         
         Color color = fadeImage.color;
@@ -26,8 +29,7 @@ public class RetryBtn : MonoBehaviour
             fadeImage.color = new Color(0,0,0,alpha) ;
             yield return null;
         }
-
         // 씬 로드
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("TestScene");
     }
 }
