@@ -58,18 +58,13 @@ public class GameManager : MonoBehaviour
             
         }
     }
-
+    
    
     public void third()
     {
         if (firstCard.idx == secondCard.idx)
         {
-            foreach (Transform Card in board)     // 이륵 목록이 활성화 되는동안 비활성화 되는 Card오브젝트의 색깔 어둡게하기
-            {
-                Transform back = Card.Find("Back");
-                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
-                cardSprite.color = new Color(100f, 100f, 100f);
-            }
+            changeColor(1);
             Collection.canCollect = true;
            
         }
@@ -117,9 +112,29 @@ public class GameManager : MonoBehaviour
         firstCard = null;
         secondCard = null;
         thirdCard = null;
-        
 
+        changeColor(-1);
     }
-
+    public void changeColor(float n)
+    {
+            foreach (Transform all in board)     // 이름 목록이 활성화 되는동안 비활성화 되는 Card오브젝트의 색깔 어둡게하기
+            {
+                if (all.name.Contains("Card"))
+                {
+                    Transform back = all.Find("Back");
+                    SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                    cardSprite.color = new Color(0.8f-0.2f*n, 0.8f - 0.2f * n, 0.8f - 0.2f * n);
+                }
+                else
+                {
+                    Transform back = all.Find("Back");
+                    SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                    cardSprite.color = new Color(0.8f + 0.2f * n, 0.8f + 0.2f * n, 0.8f + 0.2f * n);
+                }
+            }
+       
+        
+        
+    }
 
 }
