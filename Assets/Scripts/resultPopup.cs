@@ -16,6 +16,7 @@ public class resultPopup : MonoBehaviour
 
     public GameObject memberInfo;
     private GameObject[] member = new GameObject[6];
+    private GameObject newMark;
 
     private int level = 0;
 
@@ -73,6 +74,9 @@ public class resultPopup : MonoBehaviour
 
         restartText.text = "다시하기";
         toMainText.text = "처음으로";
+
+        newMark = transform.Find("HighScoreImage").GetChild(2).gameObject;
+        newMark.SetActive(false);
     }
 
     private void ScoreCheck()
@@ -91,8 +95,12 @@ public class resultPopup : MonoBehaviour
             // 현재점수 = 남은시간 / 시도횟수 * 100
             nowScore = (manager.GetLimitTime()-takenTime) / manager.tryFlip * 100;
 
+            if (nowScore < 0)
+                nowScore = 0;
+
             if (nowScore > highScore)
             {
+                newMark.SetActive(true);
                 // 현재점수가 기존 최고점수보다 높다면 최고점수 갱신
                 highScore = nowScore;
                 if (level == 0)
