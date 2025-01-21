@@ -66,11 +66,13 @@ public class Card : MonoBehaviour
             {
                 //secondCard에 내 정보를 념겨준다.
                 GameManager.Instance.secondCard = this;
-                
+
 
                 //Matched 함수를 호출해 준다.
-                GameManager.Instance.third();
-                canOpen = false;
+                //난이도에 따라 처리 로직 선택
+                if (GameManager.Instance.difficulty == 0) GameManager.Instance.Matched_Normal();
+                if (GameManager.Instance.difficulty == 1) GameManager.Instance.third();
+                    canOpen = false;
             }
         }
     }
@@ -105,29 +107,5 @@ public class Card : MonoBehaviour
         canOpen = true;
 
     }
-    public void Matched_Move()
-    {
-        for (int i = 0; i < GameManager.Instance.matchedCards.Count; i++)
-        {
-            if (!GameManager.Instance.matchedCards[i].activeSelf) //활성화되있지 않다면
-            {
-                GameManager.Instance.matchedCards[i].SetActive(true);
-                GameManager.Instance.matchedCards[i].GetComponent<MatchedCard>().image.sprite = frontImage.sprite;
-                GameManager.Instance.matchedCards[i].GetComponent<MatchedCard>().name.text = Enum.GetName(typeof(Name), idx);
-
-                break;
-            }
-        }
-    }
-    enum Name
-    {
-        진희원,
-        강기수,
-        김민성,
-        박호준,
-        유재혁,
-        매니저
-    }
-    
 }
 

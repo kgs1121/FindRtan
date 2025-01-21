@@ -525,6 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bdf0f697bd4bd42be89d7e842f9afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 0
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   thirdCard: {fileID: 0}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public int difficulty;
+
     public Card firstCard;
     public Card secondCard;
-    public List<GameObject> matchedCards = new List<GameObject>();
     public Collection thirdCard;
 
     public Text timeTxt;
@@ -86,7 +88,6 @@ public class GameManager : MonoBehaviour
             thirdCard.back.SetActive(false);
             //�ı�
             audioSource.PlayOneShot(clip);
-            firstCard.Matched_Move();
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;
@@ -112,5 +113,43 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    public void Matched_Normal()
+    {
+        if (firstCard.idx == secondCard.idx)
+        {
+            var collectionObject = board.Cast<Transform>()
+                .Where(child => child.name == "Collection(Clone)")
+                .Select(child => child.gameObject)
+                .ToList();
+            foreach (var v in collectionObject)
+            {
+                GameObject find = v.transform.Find("Front").gameObject;
+                if (!find.activeSelf)
+                {
+                    find.SetActive(true);
+                    v.transform.Find("Back").gameObject.SetActive(false);
+                    find.GetComponent<SpriteRenderer>().sprite = firstCard.frontImage.sprite;
+                    v.GetComponent<Collection>().nameTxt.text = v.GetComponent<Collection>().names[firstCard.idx];
+                    break;
+                }
+            }
+            firstCard.DestroyCard();
+            secondCard.DestroyCard();
+            cardCount -= 2;
+            if (cardCount == 0)
+            {
+                Time.timeScale = 0f;
+                endTxt.SetActive(true);
+            }
+        }
+        else
+        {
+            audioSource.PlayOneShot(clip2);
+            //�ݾ�
+            firstCard.CloseCard();
+            secondCard.CloseCard();
+        }
+        firstCard = null;
+        secondCard = null;
+    }
 }

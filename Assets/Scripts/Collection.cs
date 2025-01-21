@@ -14,7 +14,7 @@ public class Collection : MonoBehaviour
 
     public static bool canCollect=false;
     
-    string[] names = {"ÁøÈñ¿ø","°­±â¼ö","±è¹Î¼º","¹ÚÈ£ÁØ","À¯ÀçÇõ","¸£Åº"};
+    public string[] names = {"ÁøÈñ¿ø","°­±â¼ö","±è¹Î¼º","¹ÚÈ£ÁØ","À¯ÀçÇõ","¸£Åº"};
     // Start is called before the first frame update
     void Start()
     {

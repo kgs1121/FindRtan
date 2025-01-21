@@ -37,22 +37,9 @@ public class Board : MonoBehaviour
         
 
             col.transform.position = new Vector2(x2, -4);
-            col.GetComponent<Collection>().CollectSet(arr2[j]);
-        }
-    }
+            if (GameManager.Instance.difficulty == 1) col.GetComponent<Collection>().CollectSet(arr2[j]);
+            if (GameManager.Instance.difficulty == 0) col.GetComponent<Collection>().nameTxt.text = "";
 
-        // ī�� ���� ��ġ
-
-        //int[] arr2 = { 0, 1, 2, 3, 4, 5 };
-        for (int i = 0; i < 6; i++)
-        {
-            GameObject go = Instantiate(matchedCard, transform);
-            float x = i - 2.1f;
-            float y = -3.6f;
-
-            go.transform.position = new Vector2( x, y );
-
-            GameManager.Instance.matchedCards.Add(go);
         }
     }
 }
