@@ -30,6 +30,8 @@ public class resultPopup : MonoBehaviour
     private Text restartText;
     private Text toMainText;
 
+    private List<int> leftList = new List<int>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,14 +55,15 @@ public class resultPopup : MonoBehaviour
     private void SetMemberInfo()
     {
         Transform grid = transform.Find("MemberInfoGrid");
-
+        leftList = manager.lefts;
         for (int i = 0; i < member.Length; i++)
         {
             GameObject go = Instantiate(memberInfo, grid);
             go.AddComponent<LayoutElement>();
-
             MemberData data = go.GetComponent<MemberData>();
-            data.SetMemberData(i);
+
+            data.SetMemberData(i, leftList.Contains(i));
+
         }
     }
 

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public int cardCount = 0;
     public float time = 0.0f;
-    private float timeLimit = 3f;
+    private float timeLimit = 30f;
 
     public Canvas mainCanvas;
     public GameObject resultPopup;
@@ -62,9 +62,6 @@ public class GameManager : MonoBehaviour
             //endTxt.SetActive(true);
             Card.canOpen = false;
             Collection.canCollect = false;
-
-            int[] leftCards = lefts.ToArray();
-
             Instantiate(resultPopup,mainCanvas.transform);
         }
     }
