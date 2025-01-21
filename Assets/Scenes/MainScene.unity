@@ -531,16 +531,10 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 8244a166874fb01469f4d14488879dc9, type: 3}
   cardCount: 0
   time: 0
+  mainCanvas: {fileID: 1757346014}
   resultPopup: {fileID: 9165315696951684086, guid: 7400700f2abbf8845bfd889e22398d5c, type: 3}
   normalScore: 0
   hardScore: 0
-  memberName:
-  - "\uC9C4\uD76C\uC6D0"
-  - "\uAC15\uAE30\uC218"
-  - "\uAE40\uBBFC\uC131"
-  - "\uBC15\uD638\uC900"
-  - "\uC720\uC7AC\uD601"
-  - ???
 --- !u!82 &1180779289
 AudioSource:
   m_ObjectHideFlags: 0
@@ -669,6 +663,8 @@ MonoBehaviour:
   _androidGameId: 5767611
   _iOSGameId: 5767610
   _testMode: 1
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
 --- !u!4 &1318799549
 Transform:
   m_ObjectHideFlags: 0
