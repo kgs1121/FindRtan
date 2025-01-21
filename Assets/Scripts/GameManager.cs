@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,21 +10,24 @@ public class GameManager : MonoBehaviour
 
     public Card firstCard;
     public Card secondCard;
-    public Collection thirdCard;
 
     public Text timeTxt;
     public GameObject endTxt;
 
     AudioSource audioSource;
     public AudioClip clip;
-    public AudioClip clip2;
 
     public int cardCount = 0;
-    float time = 0.0f;
+    public float time = 0.0f;
+    private float timeLimit = 3f;
 
-    public List<int> lefts = new List<int> { 0, 1, 2, 3, 4, 5 };
+    public Canvas mainCanvas;
+    public GameObject resultPopup;
 
-    public Transform board;
+    public float normalScore = 0f;
+    public float hardScore = 0f;
+    public int tryFlip = 0;
+
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+        time = 0;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -47,68 +49,34 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         timeTxt.text = time.ToString("N2");
 
-        if (time >= 30.00)
+        if (time >= timeLimit)
         {
             Time.timeScale = 0f;
-            endTxt.SetActive(true);
-            Card.canOpen = false;
-            Collection.canCollect = false;
-            
-            int[] leftCards = lefts.ToArray();
-            
+            //endTxt.SetActive(true);
+            Instantiate(resultPopup,mainCanvas.transform);
         }
     }
 
-   
-    public void third()
-    {
-        if (firstCard.idx == secondCard.idx)
-        {
-            foreach (Transform Card in board)     // 이륵 목록이 활성화 되는동안 비활성화 되는 Card오브젝트의 색깔 어둡게하기
-            {
-                Transform back = Card.Find("Back");
-                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
-                cardSprite.color = new Color(100f, 100f, 100f);
-            }
-            Collection.canCollect = true;
-           
-        }
-        else
-        {
-            //닫아
-            firstCard.CloseCard();
-            secondCard.CloseCard();
-
-            firstCard = null;
-            secondCard = null;
-
-        }
-    }
     public void Matched()
     {
-        
-        if (thirdCard.idex == secondCard.idx)
+        tryFlip++;
+        if (firstCard.idx == secondCard.idx)
         {
-            
-            thirdCard.front.SetActive(true);
-            thirdCard.back.SetActive(false);
             //파괴
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
-
-            lefts.Remove(thirdCard.idex);
-
             cardCount -= 2;
             if(cardCount == 0)
             {
                 Time.timeScale = 0f;
-                endTxt.SetActive(true);
+                //endTxt.SetActive(true);
+                Instantiate(resultPopup, mainCanvas.transform);
+
             }
         }
         else
         {
-            audioSource.PlayOneShot(clip2);
             //닫아
             firstCard.CloseCard();
             secondCard.CloseCard();
@@ -116,10 +84,12 @@ public class GameManager : MonoBehaviour
         
         firstCard = null;
         secondCard = null;
-        thirdCard = null;
-        
-
     }
 
+
+    public float GetLimitTime()
+    {
+        return timeLimit;
+    }
 
 }
