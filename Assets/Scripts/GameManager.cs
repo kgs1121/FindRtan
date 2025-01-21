@@ -11,15 +11,19 @@ public class GameManager : MonoBehaviour
     public Card firstCard;
     public Card secondCard;
     public List<GameObject> matchedCards = new List<GameObject>();
+    public Collection thirdCard;
 
     public Text timeTxt;
     public GameObject endTxt;
 
     AudioSource audioSource;
     public AudioClip clip;
+    public AudioClip clip2;
 
     public int cardCount = 0;
     float time = 0.0f;
+
+    public Transform board;
 
     private void Awake()
     {
@@ -48,12 +52,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void third()
+    {
+        if (firstCard.idx == secondCard.idx)
+        {
+            foreach (Transform Card in board)     // �̸� ����� Ȱ��ȭ �Ǵµ��� ��Ȱ��ȭ �Ǵ� Card������Ʈ�� ���� ��Ӱ��ϱ�
+            {
+                Transform back = Card.Find("Back");
+                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                cardSprite.color = new Color(100f, 100f, 100f);
+            }
+            Collection.canCollect = true;
+           
+        }
+        else
+        {
+            //�ݾ�
+            firstCard.CloseCard();
+            secondCard.CloseCard();
+
+            firstCard = null;
+            secondCard = null;
+
+        }
+    }
     public void Matched()
     {
         
-        if (firstCard.idx == secondCard.idx)
+        if (thirdCard.idex == secondCard.idx)
         {
-            //�ı�
+            
+            thirdCard.front.SetActive(true);
+            thirdCard.back.SetActive(false);
+            //�ı�
             audioSource.PlayOneShot(clip);
             firstCard.Matched_Move();
             firstCard.DestroyCard();
@@ -68,13 +99,15 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //�ݾ�
+            audioSource.PlayOneShot(clip2);
+            //�ݾ�
             firstCard.CloseCard();
             secondCard.CloseCard();
         }
         
         firstCard = null;
         secondCard = null;
+        thirdCard = null;
         
 
     }
