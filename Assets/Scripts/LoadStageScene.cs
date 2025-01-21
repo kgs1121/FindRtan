@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoadStageScene : MonoBehaviour
 {
-   
-
     // Update is called once per frame
     public void LoadStage()
     {
