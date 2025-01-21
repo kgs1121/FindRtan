@@ -226,8 +226,6 @@ GameObject:
   - component: {fileID: 274968568}
   - component: {fileID: 274968570}
   - component: {fileID: 274968569}
-  - component: {fileID: 274968571}
-  - component: {fileID: 274968572}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -292,34 +290,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274968567}
   m_CullTransparentMesh: 1
---- !u!114 &274968571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274968567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd1da7f48597e0848b512c6f58492086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeImage: {fileID: 0}
-  fadeSpeed: 1.5
---- !u!114 &274968572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274968567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824c90e0e4068404587d591e664a8865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeImage: {fileID: 274968569}
-  fadeDuration: 2
 --- !u!1 &747603871
 GameObject:
   m_ObjectHideFlags: 0
