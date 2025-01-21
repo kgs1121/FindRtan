@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 5254701873822236403, guid: 593c61886bf10aa4cb6b5a1db9a34d3b, type: 3}
-  collection: {fileID: 0}
+  collection: {fileID: 7019855254481872995, guid: 2c957e3791d532243a911d268c58cf19, type: 3}
 --- !u!1 &1180779286
 GameObject:
   m_ObjectHideFlags: 0
