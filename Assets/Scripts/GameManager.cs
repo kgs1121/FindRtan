@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public int cardCount = 0;
     float time = 0.0f;
+
+    public List<int> lefts = new List<int> { 0, 1, 2, 3, 4, 5 };
 
     public Transform board;
 
@@ -49,9 +53,13 @@ public class GameManager : MonoBehaviour
             endTxt.SetActive(true);
             Card.canOpen = false;
             Collection.canCollect = false;
+            
+            int[] leftCards = lefts.ToArray();
+            
         }
     }
 
+   
     public void third()
     {
         if (firstCard.idx == secondCard.idx)
@@ -88,6 +96,9 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+
+            lefts.Remove(thirdCard.idex);
+
             cardCount -= 2;
             if(cardCount == 0)
             {
