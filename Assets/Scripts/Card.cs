@@ -66,7 +66,7 @@ public class Card : MonoBehaviour
                 
 
                 //Matched 함수를 호출해 준다.
-                GameManager.Instance.Matched();
+                GameManager.Instance.third();
                 canOpen = false;
             }
         }

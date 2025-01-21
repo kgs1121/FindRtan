@@ -10,15 +10,19 @@ public class GameManager : MonoBehaviour
 
     public Card firstCard;
     public Card secondCard;
+    public Collection thirdCard;
 
     public Text timeTxt;
     public GameObject endTxt;
 
     AudioSource audioSource;
     public AudioClip clip;
+    public AudioClip clip2;
 
     public int cardCount = 0;
     float time = 0.0f;
+
+    public Transform board;
 
     private void Awake()
     {
@@ -46,11 +50,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void third()
+    {
+        if (firstCard.idx == secondCard.idx)
+        {
+            foreach (Transform Card in board)     // 이륵 목록이 활성화 되는동안 비활성화 되는 Card오브젝트의 색깔 어둡게하기
+            {
+                Transform back = Card.Find("Back");
+                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                cardSprite.color = new Color(100f, 100f, 100f);
+            }
+            Collection.canCollect = true;
+           
+        }
+        else
+        {
+            //닫아
+            firstCard.CloseCard();
+            secondCard.CloseCard();
+
+            firstCard = null;
+            secondCard = null;
+
+        }
+    }
     public void Matched()
     {
         
-        if (firstCard.idx == secondCard.idx)
+        if (thirdCard.idex == secondCard.idx)
         {
+            
+            thirdCard.front.SetActive(true);
+            thirdCard.back.SetActive(false);
             //파괴
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
@@ -64,6 +95,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(clip2);
             //닫아
             firstCard.CloseCard();
             secondCard.CloseCard();
@@ -71,6 +103,7 @@ public class GameManager : MonoBehaviour
         
         firstCard = null;
         secondCard = null;
+        thirdCard = null;
         
 
     }
