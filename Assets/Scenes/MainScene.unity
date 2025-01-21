@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 5254701873822236403, guid: 593c61886bf10aa4cb6b5a1db9a34d3b, type: 3}
+  collection: {fileID: 0}
 --- !u!1 &1180779286
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,15 +527,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
+  thirdCard: {fileID: 0}
   timeTxt: {fileID: 2133907459}
   endTxt: {fileID: 199872881}
   clip: {fileID: 8300000, guid: 8244a166874fb01469f4d14488879dc9, type: 3}
+  clip2: {fileID: 0}
+  lefts: 000000000100000002000000030000000400000005000000
   cardCount: 0
   time: 0
   mainCanvas: {fileID: 1757346014}
   resultPopup: {fileID: 9165315696951684086, guid: 7400700f2abbf8845bfd889e22398d5c, type: 3}
   normalScore: 0
   hardScore: 0
+  tryFlip: 0
+  board: {fileID: 963709323}
 --- !u!82 &1180779289
 AudioSource:
   m_ObjectHideFlags: 0

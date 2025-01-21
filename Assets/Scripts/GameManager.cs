@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,16 @@ public class GameManager : MonoBehaviour
 
     public Card firstCard;
     public Card secondCard;
+    public Collection thirdCard;
 
     public Text timeTxt;
     public GameObject endTxt;
 
     AudioSource audioSource;
     public AudioClip clip;
+    public AudioClip clip2;
+
+    public List<int> lefts = new List<int> { 0, 1, 2, 3, 4, 5 };
 
     public int cardCount = 0;
     public float time = 0.0f;
@@ -27,6 +32,8 @@ public class GameManager : MonoBehaviour
     public float normalScore = 0f;
     public float hardScore = 0f;
     public int tryFlip = 0;
+
+    public Transform board;
 
 
     private void Awake()
@@ -53,19 +60,54 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             //endTxt.SetActive(true);
+            Card.canOpen = false;
+            Collection.canCollect = false;
+
+            int[] leftCards = lefts.ToArray();
+
             Instantiate(resultPopup,mainCanvas.transform);
+        }
+    }
+
+    public void third()
+    {
+        if (firstCard.idx == secondCard.idx)
+        {
+            foreach (Transform Card in board)    
+            {
+                Transform back = Card.Find("Back");
+                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                cardSprite.color = new Color(100f, 100f, 100f);
+            }
+            Collection.canCollect = true;
+
+        }
+        else
+        {
+            //�ݾ�
+            firstCard.CloseCard();
+            secondCard.CloseCard();
+
+            firstCard = null;
+            secondCard = null;
+
         }
     }
 
     public void Matched()
     {
         tryFlip++;
-        if (firstCard.idx == secondCard.idx)
+        if (thirdCard.idex == secondCard.idx)
         {
-            //�ı�
+            thirdCard.front.SetActive(true);
+            thirdCard.back.SetActive(false);
+
+            //파괴
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+            lefts.Remove(thirdCard.idex);
+
             cardCount -= 2;
             if(cardCount == 0)
             {
@@ -77,13 +119,16 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //�ݾ�
+            //닫아
+            audioSource.PlayOneShot(clip2);
+
             firstCard.CloseCard();
             secondCard.CloseCard();
         }
         
         firstCard = null;
         secondCard = null;
+        thirdCard = null;
     }
 
 
