@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Board : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class Board : MonoBehaviour
 
         for (int i = 0; i < 12; i++)
         {
-            GameObject go = Instantiate(card, this.transform);
+            GameObject go = Instantiate(card, transform);
 
             float x = (i % 4) * 1.4f - 2.1f;
             float y = (i / 4) * 1.4f - 1.6f;
@@ -36,9 +37,9 @@ public class Board : MonoBehaviour
         
 
             col.transform.position = new Vector2(x2, -4);
-            col.GetComponent<Collection>().CollectSet(arr2[j]);
+            if (GameManager.Instance.difficulty == 1) col.GetComponent<Collection>().CollectSet(arr2[j]);
+            if (GameManager.Instance.difficulty == 0) col.GetComponent<Collection>().nameTxt.text = "";
+
         }
     }
-
-    
 }
