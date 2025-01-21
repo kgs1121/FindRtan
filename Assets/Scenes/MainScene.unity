@@ -530,6 +530,16 @@ MonoBehaviour:
   endTxt: {fileID: 199872881}
   clip: {fileID: 8300000, guid: 8244a166874fb01469f4d14488879dc9, type: 3}
   cardCount: 0
+  time: 0
+  normalScore: 0
+  hardScore: 0
+  memberName:
+  - "\uC9C4\uD76C\uC6D0"
+  - "\uAC15\uAE30\uC218"
+  - "\uAE40\uBBFC\uC131"
+  - "\uBC15\uD638\uC900"
+  - "\uC720\uC7AC\uD601"
+  - ???
 --- !u!82 &1180779289
 AudioSource:
   m_ObjectHideFlags: 0
