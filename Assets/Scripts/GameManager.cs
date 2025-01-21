@@ -1,7 +1,6 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,12 +20,21 @@ public class GameManager : MonoBehaviour
     public AudioClip clip;
     public AudioClip clip2;
 
-    public int cardCount = 0;
-    float time = 0.0f;
-
     public List<int> lefts = new List<int> { 0, 1, 2, 3, 4, 5 };
 
+    public int cardCount = 0;
+    public float time = 0.0f;
+    private float timeLimit = 3f;
+
+    public Canvas mainCanvas;
+    public GameObject resultPopup;
+
+    public float normalScore = 0f;
+    public float hardScore = 0f;
+    public int tryFlip = 0;
+
     public Transform board;
+
 
     private void Awake()
     {
@@ -38,6 +46,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+        time = 0;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -47,18 +56,19 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         timeTxt.text = time.ToString("N2");
 
-        if (time >= 30.00)
+        if (time >= timeLimit)
         {
             Time.timeScale = 0f;
-            endTxt.SetActive(true);
+            //endTxt.SetActive(true);
             Card.canOpen = false;
             Collection.canCollect = false;
-            
+
             int[] leftCards = lefts.ToArray();
-            
+
+            Instantiate(resultPopup,mainCanvas.transform);
         }
     }
-    
+
    
     public void third()
     {
@@ -66,11 +76,11 @@ public class GameManager : MonoBehaviour
         {
             changeColor(1);
             Collection.canCollect = true;
-           
+
         }
         else
         {
-            //´İ¾Æ
+            //ï¿½İ¾ï¿½
             firstCard.CloseCard();
             secondCard.CloseCard();
 
@@ -79,32 +89,35 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
     public void Matched()
     {
-        
+        tryFlip++;
         if (thirdCard.idex == secondCard.idx)
         {
-            
             thirdCard.front.SetActive(true);
             thirdCard.back.SetActive(false);
-            //ÆÄ±«
+
+            //íŒŒê´´
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
-
             lefts.Remove(thirdCard.idex);
 
             cardCount -= 2;
             if(cardCount == 0)
             {
                 Time.timeScale = 0f;
-                endTxt.SetActive(true);
+                //endTxt.SetActive(true);
+                Instantiate(resultPopup, mainCanvas.transform);
+
             }
         }
         else
         {
+            //ë‹«ì•„
             audioSource.PlayOneShot(clip2);
-            //´İ¾Æ
+
             firstCard.CloseCard();
             secondCard.CloseCard();
         }
@@ -117,7 +130,7 @@ public class GameManager : MonoBehaviour
     }
     public void changeColor(float n)
     {
-            foreach (Transform all in board)     // ÀÌ¸§ ¸ñ·ÏÀÌ È°¼ºÈ­ µÇ´Âµ¿¾È ºñÈ°¼ºÈ­ µÇ´Â Card¿ÀºêÁ§Æ®ÀÇ »ö±ò ¾îµÓ°ÔÇÏ±â
+            foreach (Transform all in board)     // ì´ë¦„ ëª©ë¡ì´ í™œì„±í™” ë˜ëŠ”ë™ì•ˆ ë¹„í™œì„±í™” ë˜ëŠ” Cardì˜¤ë¸Œì íŠ¸ì˜ ìƒ‰ê¹” ì–´ë‘¡ê²Œí•˜ê¸°
             {
                 if (all.name.Contains("Card"))
                 {
@@ -136,5 +149,8 @@ public class GameManager : MonoBehaviour
         
         
     }
-
+    public float GetLimitTime()
+    {
+        return timeLimit;
+    }
 }
