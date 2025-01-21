@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 202102583}
   - component: {fileID: 202102586}
   - component: {fileID: 202102585}
-  - component: {fileID: 202102584}
+  - component: {fileID: 202102587}
   m_Layer: 5
   m_Name: Startmemname
   m_TagString: Untagged
@@ -161,26 +161,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -260}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &202102584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202102582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50da1f94fcd3a1947bc10276e5073233, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textComponent: {fileID: 202102585}
-  texts:
-  - "\uC9C4\uD76C\uC6D0"
-  - "\uAC15\uAE30\uC218"
-  - "\uAE40\uBBFC\uC131"
-  - "\uBC15\uD638\uC900"
-  - "\uC720\uC7AC\uD601"
-  changeInterval: 0.5
 --- !u!114 &202102585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +203,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202102582}
   m_CullTransparentMesh: 1
+--- !u!114 &202102587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202102582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df836cf633903142a6e77869cc6155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageComponent: {fileID: 1940271965}
+  textComponent: {fileID: 202102585}
+  members: []
+  texts: []
+  changeInterval: 0
 --- !u!1 &231095857
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f902eac56c83254f9b2643d0cf6d766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeImage: {fileID: 0}
+  fadeSpeed: 1.5
 --- !u!1 &1853726502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageComponent: {fileID: 1940271965}
+  textComponent: {fileID: 202102585}
   members: []
+  texts: []
   changeInterval: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
