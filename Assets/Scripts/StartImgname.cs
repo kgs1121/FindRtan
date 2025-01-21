@@ -68,7 +68,7 @@ public class StartImgname : MonoBehaviour
 
         while (true)
         {
-            if (changecard % 5 == 0 || changecard == 0)
+            if (changecard % membernum == 0 || changecard == 0)
             {
                 ShuffleArray();  // ¹è¿­ ¼¯±â
 
