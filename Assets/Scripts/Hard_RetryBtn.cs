@@ -30,6 +30,7 @@ public class Hard_RetryBtn : MonoBehaviour
             yield return null;
         }
         // 씬 로드
-        SceneManager.LoadScene("TestScene");
+        PlayerPrefs.SetInt("Diff", 1);
+        SceneManager.LoadScene("MainScene");
     }
 }

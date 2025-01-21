@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
        
         if (Instance == null) Instance = this;
+        difficulty = PlayerPrefs.GetInt("Diff");
     }
 
     // Start is called before the first frame update

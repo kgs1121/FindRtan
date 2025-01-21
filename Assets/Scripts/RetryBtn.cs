@@ -28,9 +28,10 @@ public class RetryBtn : MonoBehaviour
             fadeImage.color = new Color(0,0,0,alpha) ;
             yield return null;
         }
- 
+
 
         // 씬 로드
+        PlayerPrefs.SetInt("Diff", 0);
         SceneManager.LoadScene("MainScene");
     }
 }
