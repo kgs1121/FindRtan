@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public Card firstCard;
     public Card secondCard;
+    public GameObject[] matchedCards;
 
     public Text timeTxt;
     public GameObject endTxt;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         Time.timeScale = 1.0f;
         audioSource = GetComponent<AudioSource>();
     }
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
         {
             //ÆÄ±«
             audioSource.PlayOneShot(clip);
+            firstCard.Matched_Move();
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0f;
                 endTxt.SetActive(true);
             }
+
         }
         else
         {

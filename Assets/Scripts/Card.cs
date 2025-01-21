@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
@@ -102,8 +105,28 @@ public class Card : MonoBehaviour
         canOpen = true;
 
     }
+    public void Matched_Move()
+    {
+        for (int i = 0; i < GameManager.Instance.matchedCards.Length; i++)
+        {
+            if (!GameManager.Instance.matchedCards[i].activeSelf) //활성화되있지 않다면
+            {
+                GameManager.Instance.matchedCards[i].GetComponent<SpriteRenderer>().sprite = frontImage.sprite;
+                GameManager.Instance.matchedCards[i].GetComponent<Text>().text = Enum.GetName(typeof(Name), idx);
+                GameManager.Instance.matchedCards[i].SetActive(true);
 
-
+            }
+        }
+    }
+    enum Name
+    {
+        진희원,
+        강기수,
+        김민성,
+        박호준,
+        유재혁,
+        매니저
+    }
     
 }
 
