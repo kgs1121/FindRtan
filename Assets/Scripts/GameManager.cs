@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             endTxt.SetActive(true);
+            Card.canOpen = false;
+            Collection.canCollect = false;
         }
     }
 
