@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     public int cardCount = 0;
     float time = 0.0f;
+
+    public List<int> lefts = new List<int> { 0, 1, 2, 3, 4, 5 };
 
     public Transform board;
 
@@ -51,9 +55,15 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             endTxt.SetActive(true);
+            Card.canOpen = false;
+            Collection.canCollect = false;
+            
+            int[] leftCards = lefts.ToArray();
+            
         }
     }
-
+    
+   
     public void third()
     {
         if (firstCard.idx == secondCard.idx)
@@ -64,6 +74,7 @@ public class GameManager : MonoBehaviour
                 SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
                 cardSprite.color = new Color(100f, 100f, 100f);
             }
+            changeColor(1);
             Collection.canCollect = true;
            
         }
@@ -90,6 +101,9 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+
+            lefts.Remove(thirdCard.idex);
+
             cardCount -= 2;
             if(cardCount == 0)
             {
@@ -109,8 +123,29 @@ public class GameManager : MonoBehaviour
         firstCard = null;
         secondCard = null;
         thirdCard = null;
-        
 
+        changeColor(-1);
+    }
+    public void changeColor(float n)
+    {
+            foreach (Transform all in board)     // �̸� ����� Ȱ��ȭ �Ǵµ��� ��Ȱ��ȭ �Ǵ� Card������Ʈ�� ���� ��Ӱ��ϱ�
+            {
+                if (all.name.Contains("Card"))
+                {
+                    Transform back = all.Find("Back");
+                    SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                    cardSprite.color = new Color(0.8f-0.2f*n, 0.8f - 0.2f * n, 0.8f - 0.2f * n);
+                }
+                else
+                {
+                    Transform back = all.Find("Back");
+                    SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                    cardSprite.color = new Color(0.8f + 0.2f * n, 0.8f + 0.2f * n, 0.8f + 0.2f * n);
+                }
+            }
+       
+        
+        
     }
 
     public void Matched_Normal()

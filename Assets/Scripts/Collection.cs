@@ -34,6 +34,7 @@ public class Collection : MonoBehaviour
         {
             GameManager.Instance.thirdCard = this;
             GameManager.Instance.Matched();
+            canCollect = false;
         }
     }
     // Update is called once per frame
