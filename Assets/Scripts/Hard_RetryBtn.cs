@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Hard_RetryBtn : MonoBehaviour
 {
    public Image fadeImage; 
-    public float fadeSpeed = 1.5f; 
+    public float fadeSpeed = 1.0f; 
 
     public void Hard_Retry()
     {
@@ -22,10 +22,10 @@ public class Hard_RetryBtn : MonoBehaviour
 
         float alpha = 0f;
 
-        while (alpha <1)
+         while (alpha <fadeSpeed)
         {
-            alpha += Time.deltaTime*fadeSpeed;
-            
+            float deltaAlpha = Mathf.Max(Time.deltaTime * fadeSpeed, 0.003f);
+            alpha += deltaAlpha;
             fadeImage.color = new Color(0,0,0,alpha) ;
             yield return null;
         }
