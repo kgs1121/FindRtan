@@ -17,4 +17,9 @@ public class LoadStageScene : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
