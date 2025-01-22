@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
@@ -67,9 +67,17 @@ public class Card : MonoBehaviour
             else
             {
                 GameManager.Instance.secondCard = this;
-               
-                if (GameManager.Instance.difficulty <= 1) GameManager.Instance.Matched_Normal();
-                if (GameManager.Instance.difficulty >= 2) GameManager.Instance.third();
+
+                //Matched �Լ��� ȣ���� �ش�.
+                //���̵��� ���� ó�� ���� ����
+                if (GameManager.Instance.difficulty == 0)
+                {
+                    GameManager.Instance.tryFlip++;
+                    //Debug.Log(tryFlip);
+                    GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
+                    GameManager.Instance.Matched_Normal();
+                }
+                if (GameManager.Instance.difficulty == 1) GameManager.Instance.third();
                     canOpen = false;
             }
         }

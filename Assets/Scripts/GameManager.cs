@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Collection thirdCard;
 
     public Text timeTxt;
+    public GameObject endTxt;
+    public Text trynum;
     public Text waitingTimeTxt;
 
     AudioSource audioSource;
@@ -35,8 +37,8 @@ public class GameManager : MonoBehaviour
     public GameObject resultPopup;
 
     public float normalScore = 0f;
-    public float hardScore = 0;
-    public int tryFlip = 0;
+    public float hardScore = 0f;
+    public int tryFlip;
 
     public Transform board;
 
@@ -65,6 +67,8 @@ public class GameManager : MonoBehaviour
             }
         }
         waitingTimeTxt.gameObject.SetActive(true);
+        tryFlip = 0;
+        trynum.text = tryFlip.ToString();
         Application.targetFrameRate = 60;
         Time.timeScale = 1.0f;
         waitingTime = 3f;
@@ -131,7 +135,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            
+            GameManager.Instance.tryFlip++;
+            //Debug.Log(tryFlip);
+            GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
+            //�ݾ�
             firstCard.CloseCard();
             secondCard.CloseCard();
 
@@ -141,6 +148,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
     public void Matched()
     {
         if (thirdCard.idex == secondCard.idx)

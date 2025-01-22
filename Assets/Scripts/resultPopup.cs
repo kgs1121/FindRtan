@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class resultPopup : MonoBehaviour
 {
     private GameManager manager;
@@ -17,6 +17,7 @@ public class resultPopup : MonoBehaviour
     public GameObject memberInfo;
     private GameObject[] member = new GameObject[6];
     private GameObject newMark;
+    private GameObject failMark;
 
     private int level = 0;
 
@@ -41,12 +42,16 @@ public class resultPopup : MonoBehaviour
         if (isFirst)
         {
             isFirst = false;
-            SetPopupText();
+            SetPopupUI();
         }
         newMark = transform.Find("HighScoreImage").GetChild(2).gameObject;
         newMark.SetActive(false);
         SetMemberInfo();
         ScoreCheck();
+
+        //버튼 연결
+        restart.onClick.AddListener(Restart);
+        toMain.onClick.AddListener(MoveMainScene);
     }
 
     private void SetMemberInfo()
@@ -65,7 +70,7 @@ public class resultPopup : MonoBehaviour
     }
 
 
-    private void SetPopupText()
+    private void SetPopupUI()
     {
         popupName.text = "<b>게임 결과</b>";
 
@@ -83,7 +88,10 @@ public class resultPopup : MonoBehaviour
     {
         if (GameManager.Instance.tryFlip == 0)
         {
+            // 실패시 점수 0점
             nowScore = 0;
+            // 실패 마크 띄우기
+            failMark.SetActive(true);
         }
         else
         {
@@ -155,12 +163,13 @@ public class resultPopup : MonoBehaviour
 
     private void Restart()
     {
-        // 재시작 기능 작성 후 restart 버튼에 연결
+        PlayerPrefs.SetInt("Diff", manager.difficulty); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void MoveMainScene()
     {
-        // 메인 씬으로 이동 기능 작성 후 toMain 버튼에 연결
+        SceneManager.LoadScene("StarScene");
     }
 
 }
