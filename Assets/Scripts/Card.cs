@@ -64,11 +64,11 @@ public class Card : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.tryFlip++;
                 GameManager.Instance.secondCard = this;
 
                 if (GameManager.Instance.difficulty <= 1)
                 {
+                    GameManager.Instance.tryFlip++;
                     GameManager.Instance.Matched_Normal();
                 }
                 else 
