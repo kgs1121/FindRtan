@@ -194,11 +194,14 @@ public class GameManager : MonoBehaviour
             }
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+            lefts.Remove(firstCard.idx);
             cardCount -= 2;
             if (cardCount == 0)
             {
                 Time.timeScale = 0f;
-                endTxt.SetActive(true);
+                //endTxt.SetActive(true);
+                Instantiate(resultPopup, mainCanvas.transform);
+
             }
         }
         else

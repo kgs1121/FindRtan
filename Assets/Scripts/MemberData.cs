@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MemberData : MonoBehaviour
 {
-    public string[] memberName = new string[6] { "ÁøÈñ¿ø", "°­±â¼ö", "±è¹Î¼º", "¹ÚÈ£ÁØ", "À¯ÀçÇõ", "???" };
+    private string[] memberName = new string[6] { "ÁøÈñ¿ø", "°­±â¼ö", "±è¹Î¼º", "¹ÚÈ£ÁØ", "À¯ÀçÇõ", "¸£Åº" };
 
 
     public void SetMemberData(int i,bool isLeft)

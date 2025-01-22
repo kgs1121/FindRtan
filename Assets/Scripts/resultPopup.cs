@@ -87,7 +87,7 @@ public class resultPopup : MonoBehaviour
         highScore = level == 0 ? manager.normalScore : manager.hardScore;
 
 
-        if (false)    //매칭 실패시
+        if (manager.cardCount>0)    //매칭 실패시
         {
             nowScore = 0;
         }
