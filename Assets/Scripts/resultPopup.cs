@@ -43,7 +43,8 @@ public class resultPopup : MonoBehaviour
             isFirst = false;
             SetPopupText();
         }
-
+        newMark = transform.Find("HighScoreImage").GetChild(2).gameObject;
+        newMark.SetActive(false);
         SetMemberInfo();
         ScoreCheck();
     }
@@ -74,8 +75,8 @@ public class resultPopup : MonoBehaviour
         restartText.text = "다시하기";
         toMainText.text = "처음으로";
 
-        newMark = transform.Find("HighScoreImage").GetChild(2).gameObject;
-        newMark.SetActive(false);
+        
+        
     }
 
     private void ScoreCheck()
@@ -98,6 +99,7 @@ public class resultPopup : MonoBehaviour
                     }
                     else                                    //기존의 노멀 하이스코어가 없다면
                     {
+                        newMark.SetActive(true);
                         PlayerPrefs.SetFloat("HighScore", nowScore);  //현 스코어를 하이스코어에 저장
                         highScore = nowScore;
                     }
@@ -117,6 +119,7 @@ public class resultPopup : MonoBehaviour
                     }
                     else
                     {
+                        newMark.SetActive(true);
                         PlayerPrefs.SetFloat("hardHighScore", nowScore);  //현 스코어를 하이스코어에 저장
                         highScore = nowScore;
                     }
