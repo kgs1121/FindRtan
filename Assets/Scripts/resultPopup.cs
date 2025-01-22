@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class resultPopup : MonoBehaviour
 {
     private GameManager manager;
 
-    private float takenTime=0f;
 
     public Text popupName;
     public Text nowScoreText;
@@ -37,10 +37,6 @@ public class resultPopup : MonoBehaviour
     {
         if (manager == null)
             manager = GameManager.Instance;
-
-        takenTime = manager.time;
-        manager.time = 0;
-        nowScore = 0;
 
         if (isFirst)
         {
@@ -84,38 +80,51 @@ public class resultPopup : MonoBehaviour
 
     private void ScoreCheck()
     {
-        highScore = level == 0 ? manager.normalScore : manager.hardScore;
+            nowScore = (GameManager.Instance.time) / GameManager.Instance.tryFlip * 100f;
 
-
-        if (false)    //매칭 실패시
+        switch (GameManager.Instance.difficulty)
         {
-            nowScore = 0;
-        }
-        else
-        {
-            if (manager.tryFlip == 0)
-                manager.tryFlip = 1;
-            // 현재점수 = 남은시간 / 시도횟수 * 100
-            nowScore = (manager.GetLimitTime()-takenTime) / manager.tryFlip * 100;
-
-            if (nowScore < 0)
-                nowScore = 0;
-
-            if (nowScore > highScore)
-            {
-                newMark.SetActive(true);
-                // 현재점수가 기존 최고점수보다 높다면 최고점수 갱신
-                highScore = nowScore;
-                if (level == 0)
+            case 0:
                 {
-                    manager.normalScore = highScore;
+                    if (PlayerPrefs.HasKey("nomalHighScore")) //기존의 노멀 하이스코어가 존재한다면
+                    {
+                        highScore = PlayerPrefs.GetFloat("nomalHighScore");  //하이스코어 값을 노멀하이스코어값으로 지정
+                        if (nowScore > highScore) // 현재점수가 기존 최고점수보다 높다면 최고점수 갱신
+                        {
+                            newMark.SetActive(true);
+                            PlayerPrefs.SetFloat("HighScore", nowScore);
+                            highScore = nowScore;
+                        }
+                    }
+                    else                                    //기존의 노멀 하이스코어가 없다면
+                    {
+                        PlayerPrefs.SetFloat("HighScore", nowScore);  //현 스코어를 하이스코어에 저장
+                        highScore = nowScore;
+                    }
+                    break;
                 }
-                else
+            case 1:
                 {
-                    manager.hardScore = highScore;
+                    if (PlayerPrefs.HasKey("hardHighScore"))
+                    {
+                        highScore = PlayerPrefs.GetFloat("hardHighScore");
+                        if (nowScore > highScore)
+                        {
+                            newMark.SetActive(true);
+                            PlayerPrefs.SetFloat("hardHighScore", nowScore);
+                            highScore = nowScore;
+                        }
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetFloat("hardHighScore", nowScore);  //현 스코어를 하이스코어에 저장
+                        highScore = nowScore;
+                    }
+                break ;
                 }
-            }
+            default: break;
         }
+        
 
         nowScoreText.text = "현재 점수 : ";
         nowScoreText.text += nowScore.ToString("N0");

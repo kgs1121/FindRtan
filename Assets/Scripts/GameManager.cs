@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
 
     public int cardCount = 0;
     public float time = 0.0f;
-    private float timeLimit = 30f;
+    private float timeLimit = 0f;
 
     public Canvas mainCanvas;
     public GameObject resultPopup;
 
     public float normalScore = 0f;
-    public float hardScore = 0f;
+    public float hardScore = 0;
     public int tryFlip = 0;
 
     public Transform board;
@@ -52,19 +52,20 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         Time.timeScale = 1.0f;
-        time = 0;
+        time = 30f;
         audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
 
-        if (time >= timeLimit)
+        if (time < timeLimit)
         {
             Time.timeScale = 0f;
+            time = timeLimit;
             //endTxt.SetActive(true);
             Card.canOpen = false;
             Collection.canCollect = false;
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //�ݾ�
+            
             firstCard.CloseCard();
             secondCard.CloseCard();
 
@@ -95,7 +96,6 @@ public class GameManager : MonoBehaviour
 
     public void Matched()
     {
-        tryFlip++;
         if (thirdCard.idex == secondCard.idx)
         {
             thirdCard.front.SetActive(true);
@@ -111,7 +111,6 @@ public class GameManager : MonoBehaviour
             if(cardCount == 0)
             {
                 Time.timeScale = 0f;
-                //endTxt.SetActive(true);
                 Instantiate(resultPopup, mainCanvas.transform);
 
             }
@@ -132,9 +131,9 @@ public class GameManager : MonoBehaviour
 
         changeColor(-1f);
     }
-    public void changeColor(float n)
+    public void changeColor(float n)  //선택가능한 활성화 카드들은 흰색  선택불가능한 비활성 카드들은 회색으로 바꾸는 매서드 (1이면 하단카드 활성, -1이면 상단카드 활성)
     {
-            foreach (Transform all in board)     // �̸� ����� Ȱ��ȭ �Ǵµ��� ��Ȱ��ȭ �Ǵ� Card������Ʈ�� ���� ��Ӱ��ϱ�
+            foreach (Transform all in board)  
             {
                 if (all.name.Contains("Card"))
                 {
@@ -182,19 +181,20 @@ public class GameManager : MonoBehaviour
                     break;
                 }
             }
+            lefts.Remove(secondCard.idx);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;
             if (cardCount == 0)
             {
                 Time.timeScale = 0f;
-                endTxt.SetActive(true);
+                Instantiate(resultPopup, mainCanvas.transform);
             }
         }
         else
         {
             audioSource.PlayOneShot(clip2);
-            //�ݾ�
+          
             firstCard.CloseCard();
             secondCard.CloseCard();
         }

@@ -525,13 +525,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bdf0f697bd4bd42be89d7e842f9afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 0
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   thirdCard: {fileID: 0}
   timeTxt: {fileID: 2133907459}
   endTxt: {fileID: 199872881}
   clip: {fileID: 8300000, guid: 8244a166874fb01469f4d14488879dc9, type: 3}
-  clip2: {fileID: 0}
+  clip2: {fileID: 8300000, guid: d84934d32b28d8545af8dbdd32fba499, type: 3}
   lefts: 000000000100000002000000030000000400000005000000
   cardCount: 0
   time: 0
@@ -834,7 +835,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
