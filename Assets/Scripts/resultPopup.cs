@@ -17,6 +17,7 @@ public class resultPopup : MonoBehaviour
     public GameObject memberInfo;
     private GameObject[] member = new GameObject[6];
     private GameObject newMark;
+    private GameObject failMark;
 
     private int level = 0;
 
@@ -45,7 +46,7 @@ public class resultPopup : MonoBehaviour
         if (isFirst)
         {
             isFirst = false;
-            SetPopupText();
+            SetPopupUI();
         }
 
         SetMemberInfo();
@@ -72,7 +73,7 @@ public class resultPopup : MonoBehaviour
     }
 
 
-    private void SetPopupText()
+    private void SetPopupUI()
     {
         popupName.text = "<b>게임 결과</b>";
 
@@ -84,6 +85,9 @@ public class resultPopup : MonoBehaviour
 
         newMark = transform.Find("HighScoreImage").GetChild(2).gameObject;
         newMark.SetActive(false);
+
+        failMark = transform.Find("failMark").gameObject;
+        failMark.SetActive(false);
     }
 
     private void ScoreCheck()
@@ -94,7 +98,10 @@ public class resultPopup : MonoBehaviour
 
         if (manager.cardCount>0)    //매칭 실패시
         {
+            // 실패시 점수 0점
             nowScore = 0;
+            // 실패 마크 띄우기
+            failMark.SetActive(true);
         }
         else
         {
