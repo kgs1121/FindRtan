@@ -10,11 +10,11 @@ public class HardBtn : MonoBehaviour
 
     public void Hard_Retry()
     {
-        PlayerPrefs.SetInt("Diff", 1);
-        SceneManager.LoadScene("MainScene");
+        Time.timeScale = 1.0f;
+        StartCoroutine(FadeInAndRetry());
     }
 
-     /*IEnumerator FadeInAndRetry()
+     IEnumerator FadeInAndRetry()
     {
         
         Color color = fadeImage.color;
@@ -30,6 +30,8 @@ public class HardBtn : MonoBehaviour
             yield return null;
         }
         // 씬 로드
+        PlayerPrefs.SetInt("Diff", 1);
+        SceneManager.LoadScene("MainScene");
         
-    }*/
+    }
 }

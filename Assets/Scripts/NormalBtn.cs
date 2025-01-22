@@ -9,11 +9,10 @@ public class NormalBtn : MonoBehaviour
     public float fadeSpeed = 1.0f; 
     public void Retry()
     {
-    
-        PlayerPrefs.SetInt("Diff", 0);
-        SceneManager.LoadScene("MainScene");
+        Time.timeScale = 1.0f;
+        StartCoroutine(FadeInAndRetry());
     }
-    /*IEnumerator FadeInAndRetry()
+    IEnumerator FadeInAndRetry()
     {
  
         
@@ -32,6 +31,7 @@ public class NormalBtn : MonoBehaviour
 
 
         // 씬 로드
-        
-    }*/
+        PlayerPrefs.SetInt("Diff", 0);
+        SceneManager.LoadScene("MainScene");
+    }
 }
