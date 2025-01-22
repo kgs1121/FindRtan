@@ -71,10 +71,15 @@ public class Card : MonoBehaviour
                 //secondCard�� �� ������ ����ش�.
                 GameManager.Instance.secondCard = this;
 
-
                 //Matched �Լ��� ȣ���� �ش�.
                 //���̵��� ���� ó�� ���� ����
-                if (GameManager.Instance.difficulty == 0) GameManager.Instance.Matched_Normal();
+                if (GameManager.Instance.difficulty == 0)
+                {
+                    GameManager.Instance.tryFlip++;
+                    //Debug.Log(tryFlip);
+                    GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
+                    GameManager.Instance.Matched_Normal();
+                }
                 if (GameManager.Instance.difficulty == 1) GameManager.Instance.third();
                     canOpen = false;
             }

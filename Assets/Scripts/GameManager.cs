@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public Text timeTxt;
     public GameObject endTxt;
+    public Text trynum;
 
     AudioSource audioSource;
     public AudioClip clip;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     public float normalScore = 0f;
     public float hardScore = 0f;
-    public int tryFlip = 0;
+    public int tryFlip;
 
     public Transform board;
 
@@ -50,6 +51,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tryFlip = 0;
+        trynum.text = tryFlip.ToString();
         Application.targetFrameRate = 60;
         Time.timeScale = 1.0f;
         time = 0;
@@ -83,6 +86,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.tryFlip++;
+            //Debug.Log(tryFlip);
+            GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
             //�ݾ�
             firstCard.CloseCard();
             secondCard.CloseCard();
@@ -93,9 +99,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
     public void Matched()
     {
-        tryFlip++;
         if (thirdCard.idex == secondCard.idx)
         {
             thirdCard.front.SetActive(true);
@@ -132,6 +138,9 @@ public class GameManager : MonoBehaviour
 
         changeColor(-1f);
     }
+    
+
+
     public void changeColor(float n)
     {
             foreach (Transform all in board)     // 이름 목록이 활성화 되는동안 비활성화 되는 Card오브젝트의 색깔 어둡게하기
