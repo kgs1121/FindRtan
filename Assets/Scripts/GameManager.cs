@@ -121,7 +121,6 @@ public class GameManager : MonoBehaviour
         }
 
         timeTxt.text = time.ToString("N2");
-        trynum.text = tryFlip.ToString();
 
         
     }
