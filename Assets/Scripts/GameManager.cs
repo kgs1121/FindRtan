@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public int difficulty;
 
     public Card firstCard;
     public Card secondCard;
@@ -40,11 +44,13 @@ public class GameManager : MonoBehaviour
     {
        
         if (Instance == null) Instance = this;
+        difficulty = PlayerPrefs.GetInt("Diff");
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         Time.timeScale = 1.0f;
         time = 0;
         audioSource = GetComponent<AudioSource>();
@@ -70,6 +76,12 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
+            foreach (Transform Card in board)     // �̸� ����� Ȱ��ȭ �Ǵµ��� ��Ȱ��ȭ �Ǵ� Card������Ʈ�� ���� ��Ӱ��ϱ�
+            {
+                Transform back = Card.Find("Back");
+                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
+                cardSprite.color = new Color(100f, 100f, 100f);
+            }
             changeColor(1);
             foreach (Transform Card in board)    
             {
@@ -101,6 +113,7 @@ public class GameManager : MonoBehaviour
             thirdCard.back.SetActive(false);
 
             //파괴
+>>>>>>> main
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
@@ -114,12 +127,14 @@ public class GameManager : MonoBehaviour
                 Instantiate(resultPopup, mainCanvas.transform);
 
             }
+
         }
         else
         {
             //닫아
             audioSource.PlayOneShot(clip2);
 
+            //�ݾ�
             firstCard.CloseCard();
             secondCard.CloseCard();
         }
@@ -160,4 +175,43 @@ public class GameManager : MonoBehaviour
         return timeLimit;
     }
 
+    public void Matched_Normal()
+    {
+        if (firstCard.idx == secondCard.idx)
+        {
+            var collectionObject = board.Cast<Transform>()
+                .Where(child => child.name == "Collection(Clone)")
+                .Select(child => child.gameObject)
+                .ToList();
+            foreach (var v in collectionObject)
+            {
+                GameObject find = v.transform.Find("Front").gameObject;
+                if (!find.activeSelf)
+                {
+                    find.SetActive(true);
+                    v.transform.Find("Back").gameObject.SetActive(false);
+                    find.GetComponent<SpriteRenderer>().sprite = firstCard.frontImage.sprite;
+                    v.GetComponent<Collection>().nameTxt.text = v.GetComponent<Collection>().names[firstCard.idx];
+                    break;
+                }
+            }
+            firstCard.DestroyCard();
+            secondCard.DestroyCard();
+            cardCount -= 2;
+            if (cardCount == 0)
+            {
+                Time.timeScale = 0f;
+                endTxt.SetActive(true);
+            }
+        }
+        else
+        {
+            audioSource.PlayOneShot(clip2);
+            //�ݾ�
+            firstCard.CloseCard();
+            secondCard.CloseCard();
+        }
+        firstCard = null;
+        secondCard = null;
+    }
 }
