@@ -88,8 +88,9 @@ public class resultPopup : MonoBehaviour
 
     private void ScoreCheck()
     {
-        highScore = level == 0 ? manager.normalScore : manager.hardScore;
+        level = manager.difficulty;
 
+        highScore = (int)(level == 0 ? PlayerPrefs.GetInt("NormalScore") : PlayerPrefs.GetInt("HardScore"));
 
         if (manager.cardCount>0)    //매칭 실패시
         {
@@ -112,11 +113,11 @@ public class resultPopup : MonoBehaviour
                 highScore = nowScore;
                 if (level == 0)
                 {
-                    manager.normalScore = highScore;
+                    PlayerPrefs.SetInt("NormalScore", (int)highScore);
                 }
                 else
                 {
-                    manager.hardScore = highScore;
+                    PlayerPrefs.SetInt("HardScore", (int)highScore);
                 }
             }
         }
