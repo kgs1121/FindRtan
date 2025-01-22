@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 public class resultPopup : MonoBehaviour
 {
     private GameManager manager;
@@ -19,7 +18,7 @@ public class resultPopup : MonoBehaviour
     private GameObject newMark;
     public GameObject failMark;
 
-    private int level = GameManager.Instance.difficulty;
+    private int level;
 
     private float nowScore = 0f;
     private float highScore = 0f;
@@ -36,6 +35,7 @@ public class resultPopup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        level = GameManager.Instance.difficulty;
         if (manager == null)
             manager = GameManager.Instance;
 
