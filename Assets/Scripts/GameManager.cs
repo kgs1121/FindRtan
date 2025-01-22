@@ -175,6 +175,7 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
+            audioSource.PlayOneShot(clip);
             var collectionObject = board.Cast<Transform>()
                 .Where(child => child.name == "Collection(Clone)")
                 .Select(child => child.gameObject)
