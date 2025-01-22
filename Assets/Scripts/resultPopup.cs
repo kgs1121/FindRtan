@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class resultPopup : MonoBehaviour
 {
     private GameManager manager;
@@ -50,6 +50,10 @@ public class resultPopup : MonoBehaviour
 
         SetMemberInfo();
         ScoreCheck();
+
+        //버튼 연결
+        restart.onClick.AddListener(Restart);
+        toMain.onClick.AddListener(MoveMainScene);
     }
 
     private void SetMemberInfo()
@@ -130,12 +134,13 @@ public class resultPopup : MonoBehaviour
 
     private void Restart()
     {
-        // 재시작 기능 작성 후 restart 버튼에 연결
+        PlayerPrefs.SetInt("Diff", manager.difficulty); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void MoveMainScene()
     {
-        // 메인 씬으로 이동 기능 작성 후 toMain 버튼에 연결
+        SceneManager.LoadScene("StarScene");
     }
 
 }

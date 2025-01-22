@@ -3,18 +3,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Hard_RetryBtn : MonoBehaviour
+public class HardBtn : MonoBehaviour
 {
    public Image fadeImage; 
     public float fadeSpeed = 1.0f; 
 
     public void Hard_Retry()
     {
-
-        StartCoroutine(FadeInAndRetry());
+        PlayerPrefs.SetInt("Diff", 1);
+        SceneManager.LoadScene("MainScene");
     }
 
-     IEnumerator FadeInAndRetry()
+     /*IEnumerator FadeInAndRetry()
     {
         
         Color color = fadeImage.color;
@@ -30,7 +30,6 @@ public class Hard_RetryBtn : MonoBehaviour
             yield return null;
         }
         // 씬 로드
-        PlayerPrefs.SetInt("Diff", 1);
-        SceneManager.LoadScene("MainScene");
-    }
+        
+    }*/
 }

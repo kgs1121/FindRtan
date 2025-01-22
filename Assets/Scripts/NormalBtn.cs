@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class RetryBtn : MonoBehaviour
+public class NormalBtn : MonoBehaviour
 {
     public Image fadeImage; 
     public float fadeSpeed = 1.0f; 
     public void Retry()
     {
     
-        StartCoroutine(FadeInAndRetry());
+        PlayerPrefs.SetInt("Diff", 0);
+        SceneManager.LoadScene("MainScene");
     }
-    IEnumerator FadeInAndRetry()
+    /*IEnumerator FadeInAndRetry()
     {
  
         
@@ -31,7 +32,6 @@ public class RetryBtn : MonoBehaviour
 
 
         // 씬 로드
-        PlayerPrefs.SetInt("Diff", 0);
-        SceneManager.LoadScene("MainScene");
-    }
+        
+    }*/
 }

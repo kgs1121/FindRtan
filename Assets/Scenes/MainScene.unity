@@ -532,7 +532,7 @@ MonoBehaviour:
   timeTxt: {fileID: 2133907459}
   endTxt: {fileID: 199872881}
   clip: {fileID: 8300000, guid: 8244a166874fb01469f4d14488879dc9, type: 3}
-  clip2: {fileID: 0}
+  clip2: {fileID: 8300000, guid: d84934d32b28d8545af8dbdd32fba499, type: 3}
   lefts: 000000000100000002000000030000000400000005000000
   cardCount: 0
   time: 0
