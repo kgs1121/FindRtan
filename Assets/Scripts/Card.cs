@@ -20,10 +20,10 @@ public class Card : MonoBehaviour
 
     public SpriteRenderer frontImage;
 
-    private float membersize = 1f;  // ��� ī�� ������
+    private float membersize = 1f; 
 
 
-    public static bool canOpen = true;// ī�� ���������� ������ ����
+    public static bool canOpen = true;
 
 
     void Start()
@@ -51,6 +51,7 @@ public class Card : MonoBehaviour
 
         if (canOpen)
         {
+            GameManager.Instance.tryFlip++;
             if (GameManager.Instance.secondCard != null) return;
 
             audioSource.PlayOneShot(clip);
@@ -58,22 +59,16 @@ public class Card : MonoBehaviour
             front.SetActive(true);
             back.SetActive(false);
 
-            // firstCard�� ����ٸ�
+     
             if (GameManager.Instance.firstCard == null)
             {
-                // firstCard�� �� ������ ����ش�.
                 GameManager.Instance.firstCard = this;
-                
             }
-            // firstCard�� ������� �ʴٸ� 
+          
             else
             {
-                //secondCard�� �� ������ ����ش�.
                 GameManager.Instance.secondCard = this;
-
-
-                //Matched �Լ��� ȣ���� �ش�.
-                //���̵��� ���� ó�� ���� ����
+               
                 if (GameManager.Instance.difficulty == 0) GameManager.Instance.Matched_Normal();
                 if (GameManager.Instance.difficulty == 1) GameManager.Instance.third();
                     canOpen = false;

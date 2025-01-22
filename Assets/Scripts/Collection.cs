@@ -32,6 +32,7 @@ public class Collection : MonoBehaviour
     {
         if (canCollect)
         {
+            GameManager.Instance.tryFlip++;
             GameManager.Instance.thirdCard = this;
             GameManager.Instance.Matched();
             canCollect = false;

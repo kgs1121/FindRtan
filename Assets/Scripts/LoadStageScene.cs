@@ -9,4 +9,12 @@ public class LoadStageScene : MonoBehaviour
     {
         SceneManager.LoadScene("StageScene");
     }
+    public void LoadStar()
+    {
+        SceneManager.LoadScene("StarScene");
+    }
+    public void LoadMain()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
 }
