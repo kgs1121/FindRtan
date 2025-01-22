@@ -81,26 +81,36 @@ public class resultPopup : MonoBehaviour
 
     private void ScoreCheck()
     {
-            nowScore = (GameManager.Instance.time) / GameManager.Instance.tryFlip * 100f;
-
+        if (GameManager.Instance.tryFlip == 0)
+        {
+            nowScore = 0;
+        }
+        else
+        {
+            nowScore = GameManager.Instance.time / GameManager.Instance.tryFlip * 100;
+        }
         switch (GameManager.Instance.difficulty)
         {
             case 0:
                 {
-                    if (PlayerPrefs.HasKey("nomalHighScore")) //기존의 노멀 하이스코어가 존재한다면
+                    if (PlayerPrefs.HasKey("normalHighScore")) //기존의 노멀 하이스코어가 존재한다면
                     {
-                        highScore = PlayerPrefs.GetFloat("nomalHighScore");  //하이스코어 값을 노멀하이스코어값으로 지정
+                        highScore = PlayerPrefs.GetFloat("normalHighScore");  //하이스코어 값을 노멀하이스코어값으로 지정
                         if (nowScore > highScore) // 현재점수가 기존 최고점수보다 높다면 최고점수 갱신
                         {
                             newMark.SetActive(true);
-                            PlayerPrefs.SetFloat("HighScore", nowScore);
+                            PlayerPrefs.SetFloat("normalHighScore", nowScore);
                             highScore = nowScore;
+                        }
+                        else
+                        {
+                            highScore = PlayerPrefs.GetFloat("normalHighScore");
                         }
                     }
                     else                                    //기존의 노멀 하이스코어가 없다면
                     {
                         newMark.SetActive(true);
-                        PlayerPrefs.SetFloat("HighScore", nowScore);  //현 스코어를 하이스코어에 저장
+                        PlayerPrefs.SetFloat("normalHighScore", nowScore);  //현 스코어를 하이스코어에 저장
                         highScore = nowScore;
                     }
                     break;
@@ -109,12 +119,15 @@ public class resultPopup : MonoBehaviour
                 {
                     if (PlayerPrefs.HasKey("hardHighScore"))
                     {
-                        highScore = PlayerPrefs.GetFloat("hardHighScore");
-                        if (nowScore > highScore)
+                        if (nowScore > PlayerPrefs.GetFloat("hardHighScore"))
                         {
                             newMark.SetActive(true);
                             PlayerPrefs.SetFloat("hardHighScore", nowScore);
                             highScore = nowScore;
+                        }
+                        else
+                        {
+                            highScore = PlayerPrefs.GetFloat("hardHighScore");
                         }
                     }
                     else
