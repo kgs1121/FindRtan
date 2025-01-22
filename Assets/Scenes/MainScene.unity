@@ -525,7 +525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bdf0f697bd4bd42be89d7e842f9afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 0
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   thirdCard: {fileID: 0}
@@ -541,7 +540,6 @@ MonoBehaviour:
   normalScore: 0
   hardScore: 0
   tryFlip: 0
-  lefts: 000000000100000002000000030000000400000005000000
   board: {fileID: 963709323}
 --- !u!82 &1180779289
 AudioSource:
