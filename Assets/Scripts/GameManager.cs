@@ -76,19 +76,8 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
-            foreach (Transform Card in board)     // �̸� ����� Ȱ��ȭ �Ǵµ��� ��Ȱ��ȭ �Ǵ� Card������Ʈ�� ���� ��Ӱ��ϱ�
-            {
-                Transform back = Card.Find("Back");
-                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
-                cardSprite.color = new Color(100f, 100f, 100f);
-            }
-            changeColor(1);
-            foreach (Transform Card in board)    
-            {
-                Transform back = Card.Find("Back");
-                SpriteRenderer cardSprite = back.GetComponent<SpriteRenderer>();
-                cardSprite.color = new Color(100f, 100f, 100f);
-            }
+            changeColor(1f);
+          
             Collection.canCollect = true;
 
         }
@@ -141,7 +130,7 @@ public class GameManager : MonoBehaviour
         secondCard = null;
         thirdCard = null;
 
-        changeColor(-1);
+        changeColor(-1f);
     }
     public void changeColor(float n)
     {
