@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.tryFlip++;
             firstCard.CloseCard();
             secondCard.CloseCard();
 

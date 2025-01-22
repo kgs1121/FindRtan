@@ -50,7 +50,7 @@ public class Card : MonoBehaviour
 
         if (canOpen)
         {
-            GameManager.Instance.tryFlip++;
+            
 
             audioSource.PlayOneShot(clip);
             anim.SetBool("isOpen", true);
@@ -68,6 +68,7 @@ public class Card : MonoBehaviour
 
                 if (GameManager.Instance.difficulty <= 1)
                 {
+                    GameManager.Instance.tryFlip++;
                     GameManager.Instance.Matched_Normal();
                 }
                 else 

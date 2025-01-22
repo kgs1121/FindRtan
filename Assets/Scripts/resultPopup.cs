@@ -98,23 +98,23 @@ public class resultPopup : MonoBehaviour
             nowScore = GameManager.Instance.time / GameManager.Instance.tryFlip * 100;
         }
 
-        if (PlayerPrefs.HasKey($"level{level}HighScore")) //기존의 노멀 하이스코어가 존재한다면
+        if (PlayerPrefs.HasKey($"level{GameManager.Instance.difficulty}HighScore")) //기존의 노멀 하이스코어가 존재한다면
         {
-            if (nowScore >  PlayerPrefs.GetFloat($"level{level}HighScore")) // 현재점수가 기존 최고점수보다 높다면 최고점수 갱신
+            if (nowScore >  PlayerPrefs.GetFloat($"level{GameManager.Instance.difficulty}HighScore")) // 현재점수가 기존 최고점수보다 높다면 최고점수 갱신
             {
                 newMark.SetActive(true);
-                PlayerPrefs.SetFloat($"level{level}HighScore", nowScore);
+                PlayerPrefs.SetFloat($"level{GameManager.Instance.difficulty}HighScore", nowScore);
                 highScore = nowScore;
             }
             else
             {
-                highScore = PlayerPrefs.GetFloat($"level{level}HighScore");
+                highScore = PlayerPrefs.GetFloat($"level{GameManager.Instance.difficulty}HighScore");
             }
         }
         else                                    //기존의 노멀 하이스코어가 없다면
         {
             newMark.SetActive(true);
-            PlayerPrefs.SetFloat($"level{level}HighScore", nowScore);  //현 스코어를 하이스코어에 저장
+            PlayerPrefs.SetFloat($"level{GameManager.Instance.difficulty}HighScore", nowScore);  //현 스코어를 하이스코어에 저장
             highScore = nowScore;
         }
 
