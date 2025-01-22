@@ -112,8 +112,6 @@ public class GameManager : MonoBehaviour
             thirdCard.front.SetActive(true);
             thirdCard.back.SetActive(false);
 
-            //파괴
->>>>>>> main
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
@@ -134,7 +132,6 @@ public class GameManager : MonoBehaviour
             //닫아
             audioSource.PlayOneShot(clip2);
 
-            //�ݾ�
             firstCard.CloseCard();
             secondCard.CloseCard();
         }
@@ -148,6 +145,7 @@ public class GameManager : MonoBehaviour
     public void changeColor(float n)
     {
             foreach (Transform all in board)     // 이름 목록이 활성화 되는동안 비활성화 되는 Card오브젝트의 색깔 어둡게하기
+
             {
                 if (all.name.Contains("Card"))
                 {
@@ -167,7 +165,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    
 
 
     public float GetLimitTime()
