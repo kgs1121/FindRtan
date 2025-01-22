@@ -83,7 +83,7 @@ public class Card : MonoBehaviour
     public void DestroyCard()
     {
         //Debug.Log($"canOpen check: {canOpen}");
-        Invoke("DestroyCardInvoke", 0.8f);
+        Invoke("DestroyCardInvoke", 0.3f);
         
        
     } 
