@@ -23,13 +23,12 @@ public class Card : MonoBehaviour
     private float membersize = 1f; 
 
 
-    public static bool canOpen = true;
+    public static bool canOpen = false;
 
 
     void Start()
     {
         membercardsize(frontImage);
-        canOpen = true;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -69,8 +68,8 @@ public class Card : MonoBehaviour
             {
                 GameManager.Instance.secondCard = this;
                
-                if (GameManager.Instance.difficulty == 0) GameManager.Instance.Matched_Normal();
-                if (GameManager.Instance.difficulty == 1) GameManager.Instance.third();
+                if (GameManager.Instance.difficulty <= 1) GameManager.Instance.Matched_Normal();
+                if (GameManager.Instance.difficulty >= 2) GameManager.Instance.third();
                     canOpen = false;
             }
         }

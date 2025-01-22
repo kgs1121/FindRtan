@@ -37,8 +37,8 @@ public class Board : MonoBehaviour
         
 
             col.transform.position = new Vector2(x2, -4);
-            if (GameManager.Instance.difficulty == 1) col.GetComponent<Collection>().CollectSet(arr2[j]);
-            if (GameManager.Instance.difficulty == 0) col.GetComponent<Collection>().nameTxt.text = "";
+            if (GameManager.Instance.difficulty >= 2) col.GetComponent<Collection>().CollectSet(arr2[j]);
+            if (GameManager.Instance.difficulty <= 1) col.GetComponent<Collection>().nameTxt.text = "";
 
         }
     }

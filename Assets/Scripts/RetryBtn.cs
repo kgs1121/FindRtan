@@ -7,12 +7,12 @@ public class RetryBtn : MonoBehaviour
 {
     public Image fadeImage; 
     public float fadeSpeed = 1.0f; 
-    public void Retry()
+    public void Retry(int n)
     {
     
-        StartCoroutine(FadeInAndRetry());
+        StartCoroutine(FadeInAndRetry(n));
     }
-    IEnumerator FadeInAndRetry()
+    IEnumerator FadeInAndRetry(int n)
     {
  
         
@@ -31,7 +31,7 @@ public class RetryBtn : MonoBehaviour
 
 
         // 씬 로드
-        PlayerPrefs.SetInt("Diff", 0);
+        PlayerPrefs.SetInt("Diff", n);
         SceneManager.LoadScene("MainScene");
     }
 }

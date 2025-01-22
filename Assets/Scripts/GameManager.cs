@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public Collection thirdCard;
 
     public Text timeTxt;
-    public GameObject endTxt;
+    public Text waitingTimeTxt;
 
     AudioSource audioSource;
     public AudioClip clip;
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public List<int> lefts = new List<int> { 0, 1, 2, 3, 4, 5 };
 
     public int cardCount = 0;
+    public float waitingTime;
     public float time = 0.0f;
     private float timeLimit = 0f;
 
@@ -50,8 +51,23 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (difficulty == 0)
+        {
+            foreach(Transform Card in board)
+            {
+                if (Card.name.Contains("Card"))
+                {
+                    Transform front = Card.Find("Front");
+                    front.gameObject.SetActive(true);
+                    Transform back = Card.Find("Back");
+                    back.gameObject.SetActive(false);
+                }
+            }
+        }
+        waitingTimeTxt.gameObject.SetActive(true);
         Application.targetFrameRate = 60;
         Time.timeScale = 1.0f;
+        waitingTime = 3f;
         time = 30f;
         audioSource = GetComponent<AudioSource>();
     }
@@ -59,7 +75,38 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
+        if (waitingTime >= 0)
+        {
+            waitingTime -= Time.deltaTime;
+        }
+        else
+        {
+            if (waitingTimeTxt.gameObject.activeSelf)
+            {
+                foreach (Transform Card in board)
+                {
+                    if (Card.name.Contains("Card"))
+                    {
+                        Transform front = Card.Find("Front");
+                        front.gameObject.SetActive(false);
+                        Transform back = Card.Find("Back");
+                        back.gameObject.SetActive(true);
+                    }
+                }
+                waitingTimeTxt.gameObject.SetActive(false);
+                Card.canOpen = true;
+            }
+            time -= Time.deltaTime;
+        }
+        if (waitingTime <= 0)
+        {
+            waitingTimeTxt.text = "0";
+        }
+        else
+        {
+            waitingTimeTxt.text = Mathf.Ceil(waitingTime).ToString();
+        }
+        
         timeTxt.text = time.ToString("N2");
 
         if (time < timeLimit)
@@ -118,6 +165,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (difficulty == 3)
+            {
+                time -= 1f;
+            }
             //닫아
             audioSource.PlayOneShot(clip2);
 
@@ -164,6 +215,7 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
+            audioSource.PlayOneShot(clip);
             var collectionObject = board.Cast<Transform>()
                 .Where(child => child.name == "Collection(Clone)")
                 .Select(child => child.gameObject)
