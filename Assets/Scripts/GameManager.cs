@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     public int cardCount = 0;
     public float waitingTime;
-    public float time = 0.0f;
+    public float time = 30.0f;
     private float timeLimit = 0f;
 
     public Canvas mainCanvas;
@@ -48,6 +48,12 @@ public class GameManager : MonoBehaviour
        
         if (Instance == null) Instance = this;
         difficulty = PlayerPrefs.GetInt("Diff");
+
+        Application.targetFrameRate = 60;
+        Time.timeScale = 1.0f;
+        waitingTime = 3f;
+        time = 30f;
+        tryFlip = 0;
     }
 
     // Start is called before the first frame update
@@ -67,12 +73,6 @@ public class GameManager : MonoBehaviour
             }
         }
         waitingTimeTxt.gameObject.SetActive(true);
-        tryFlip = 0;
-        trynum.text = tryFlip.ToString();
-        Application.targetFrameRate = 60;
-        Time.timeScale = 1.0f;
-        waitingTime = 3f;
-        time = 30f;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -110,18 +110,20 @@ public class GameManager : MonoBehaviour
         {
             waitingTimeTxt.text = Mathf.Ceil(waitingTime).ToString();
         }
-        
-        timeTxt.text = time.ToString("N2");
-
         if (time < timeLimit)
         {
             Time.timeScale = 0f;
             time = timeLimit;
-            //endTxt.SetActive(true);
             Card.canOpen = false;
             Collection.canCollect = false;
-            Instantiate(resultPopup,mainCanvas.transform);
+
+            Instantiate(resultPopup, mainCanvas.transform);
         }
+
+        timeTxt.text = time.ToString("N2");
+        trynum.text = tryFlip.ToString();
+
+        
     }
 
     public void third()
@@ -135,10 +137,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.tryFlip++;
-            //Debug.Log(tryFlip);
-            GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
-            //�ݾ�
             firstCard.CloseCard();
             secondCard.CloseCard();
 

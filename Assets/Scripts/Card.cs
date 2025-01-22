@@ -51,7 +51,6 @@ public class Card : MonoBehaviour
         if (canOpen)
         {
             GameManager.Instance.tryFlip++;
-            if (GameManager.Instance.secondCard != null) return;
 
             audioSource.PlayOneShot(clip);
             anim.SetBool("isOpen", true);
@@ -63,21 +62,18 @@ public class Card : MonoBehaviour
             {
                 GameManager.Instance.firstCard = this;
             }
-          
             else
             {
                 GameManager.Instance.secondCard = this;
 
-                //Matched �Լ��� ȣ���� �ش�.
-                //���̵��� ���� ó�� ���� ����
-                if (GameManager.Instance.difficulty == 0)
+                if (GameManager.Instance.difficulty <= 1)
                 {
-                    GameManager.Instance.tryFlip++;
-                    //Debug.Log(tryFlip);
-                    GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
                     GameManager.Instance.Matched_Normal();
                 }
-                if (GameManager.Instance.difficulty == 1) GameManager.Instance.third();
+                else 
+                { 
+                    GameManager.Instance.third(); 
+                }
                     canOpen = false;
             }
         }

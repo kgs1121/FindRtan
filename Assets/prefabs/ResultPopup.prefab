@@ -1140,7 +1140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2601073714407569958
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1377,5 +1377,6 @@ MonoBehaviour:
   nowScoreText: {fileID: 1619044693712779898}
   highScoreText: {fileID: 1936898915281289443}
   memberInfo: {fileID: 5464862641033092994, guid: 7684eb64917f6a64e92e045a1e5b0d5a, type: 3}
+  failMark: {fileID: 6446000071970437175}
   restart: {fileID: 7434714984250189656}
   toMain: {fileID: 6741074938458177787}
