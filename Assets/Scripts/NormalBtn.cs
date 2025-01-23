@@ -3,10 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class NormalBtn : MonoBehaviour
+using UnityEngine.EventSystems;
+public class NormalBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image fadeImage; 
-    public float fadeSpeed = 1.0f; 
+    public float fadeSpeed = 1.0f;
+    public GameObject explains;
+    public string nameNum;
+    public int BtnIdx;
+
+
+    public void Awake()
+    {
+        nameNum =this.name[0].ToString();
+        BtnIdx = int.Parse(nameNum);
+    }
     public void Retry(int n)
     {
     
@@ -34,4 +45,16 @@ public class NormalBtn : MonoBehaviour
         PlayerPrefs.SetInt("Diff", n);
         SceneManager.LoadScene("MainScene");
     }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        GameObject childExplain = explains.transform.GetChild(BtnIdx).gameObject;
+        childExplain.SetActive(true);
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        GameObject childExplain = explains.transform.GetChild(BtnIdx).gameObject;
+        childExplain.SetActive(false);
+    }
+
+    
 }
