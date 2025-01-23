@@ -44,7 +44,7 @@ public class resultPopup : MonoBehaviour
             isFirst = false;
             SetPopupUI();
         }
-        newMark = transform.Find("HighScoreImage").GetChild(2).gameObject;
+        newMark = transform.Find("newMark").gameObject;
         newMark.SetActive(false);
         SetMemberInfo();
         ScoreCheck();
@@ -61,7 +61,6 @@ public class resultPopup : MonoBehaviour
         for (int i = 0; i < member.Length; i++)
         {
             GameObject go = Instantiate(memberInfo, grid);
-            go.AddComponent<LayoutElement>();
             MemberData data = go.GetComponent<MemberData>();
 
             data.SetMemberData(i, leftList.Contains(i));
