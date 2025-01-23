@@ -61,7 +61,6 @@ public class resultPopup : MonoBehaviour
         for (int i = 0; i < member.Length; i++)
         {
             GameObject go = Instantiate(memberInfo, grid);
-            go.AddComponent<LayoutElement>();
             MemberData data = go.GetComponent<MemberData>();
 
             data.SetMemberData(i, leftList.Contains(i));
