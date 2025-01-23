@@ -44,7 +44,7 @@ public class resultPopup : MonoBehaviour
             isFirst = false;
             SetPopupUI();
         }
-        newMark = transform.Find("newMark").gameObject;
+        newMark = transform.Find("HighScoreImage").GetChild(2).gameObject;
         newMark.SetActive(false);
         SetMemberInfo();
         ScoreCheck();
