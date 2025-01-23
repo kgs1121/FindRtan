@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tryFlip = 0;
         if (difficulty == 0)
         {
             foreach(Transform Card in board)
@@ -136,7 +137,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.tryFlip++;
             firstCard.CloseCard();
             secondCard.CloseCard();
 

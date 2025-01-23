@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -68,14 +69,17 @@ public class Card : MonoBehaviour
 
                 if (GameManager.Instance.difficulty <= 1)
                 {
-                    GameManager.Instance.tryFlip++;
+
                     GameManager.Instance.Matched_Normal();
                 }
                 else 
                 { 
                     GameManager.Instance.third(); 
                 }
-                    canOpen = false;
+
+                GameManager.Instance.tryFlip++;
+                GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString("N0");
+                canOpen = false;
             }
         }
     }
