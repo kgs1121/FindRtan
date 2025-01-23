@@ -112,10 +112,7 @@ public class resultPopup : MonoBehaviour
         }
         else                                    //기존의 노멀 하이스코어가 없다면
         {
-            if (nowScore != 0)
-            {
-                newMark.SetActive(true);
-            }
+            newMark.SetActive(true);
             PlayerPrefs.SetFloat($"level{GameManager.Instance.difficulty}HighScore", nowScore);  //현 스코어를 하이스코어에 저장
             highScore = nowScore;
         }
