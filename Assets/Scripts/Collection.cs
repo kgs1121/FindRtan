@@ -36,7 +36,7 @@ public class Collection : MonoBehaviour
             GameManager.Instance.Matched();
             GameManager.Instance.tryFlip++;
             //Debug.Log(tryFlip);
-            GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
+            
             canCollect = false;
         }
     }

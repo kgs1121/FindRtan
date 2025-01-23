@@ -121,8 +121,8 @@ public class GameManager : MonoBehaviour
         }
 
         timeTxt.text = time.ToString("N2");
+        GameManager.Instance.trynum.text = GameManager.Instance.tryFlip.ToString();
 
-        
     }
 
     public void third()
